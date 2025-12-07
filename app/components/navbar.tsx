@@ -6,28 +6,27 @@ import {
   SignedOut,
   UserButton,
 } from "@clerk/nextjs";
+import { ModeToggle } from "@/components/ui/theme-toggle";
+import { Button } from "@/components/ui/button";
 
 const navbar = () => {
   return (
-    <header className="flex justify-between items-center p-4 gap-4 h-16">
+    <header className="flex justify-between items-center p-4 mx-2 my-4 gap-4 h-16">
       <div className="text-2xl font-bold">Daily Cat</div>
 
       <div className="flex items-center gap-4">
         <SignedOut>
           <SignInButton>
-            <button className="bg-white text-neutral-400 rounded-full font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 cursor-pointer">
-              Sign In
-            </button>
+            <Button variant="outline">Log In</Button>
           </SignInButton>
           <SignUpButton>
-            <button className="bg-[#6c47ff] text-ceramic-white rounded-full font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 cursor-pointer">
-              Sign Up
-            </button>
+            <Button variant="outline">Sign Up</Button>
           </SignUpButton>
         </SignedOut>
         <SignedIn>
           <UserButton />
         </SignedIn>
+        <ModeToggle />
       </div>
     </header>
   );

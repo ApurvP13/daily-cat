@@ -1,9 +1,21 @@
 "use client";
 import { useUser } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
 import SectionCard from "../components/section-card";
+import { toast } from "sonner";
 
 export default function Dashboard() {
   const { user } = useUser();
+  const router = useRouter();
+
+  const handleCardClick = (sectionName: string, comingSoon?: boolean) => {
+    if (comingSoon)
+      return toast("Coming Soon!", {
+        description:
+          "DILR section is coming soon, please wait for it to be released.",
+      }); // Don't navigate if coming soon
+    router.push(`/dashboard/${sectionName}/question`);
+  };
   return (
     <div className="w-full flex flex-col items-center justify-between text-4xl">
       {/* Header */}
@@ -29,7 +41,7 @@ export default function Dashboard() {
             />
           }
           completed={false}
-          onClick={() => {}}
+          onClick={() => handleCardClick("Varc")}
           hard={true}
         />
         <SectionCard
@@ -42,7 +54,7 @@ export default function Dashboard() {
             />
           }
           completed={false}
-          onClick={() => {}}
+          onClick={() => handleCardClick("Dilr", true)}
           hard={false}
           comingSoon={true}
         />
@@ -52,7 +64,7 @@ export default function Dashboard() {
             <img className="size-[200px]" src="/qa-logo.webp" alt="QA Logo" />
           }
           completed={true}
-          onClick={() => {}}
+          onClick={() => handleCardClick("Qa")}
           hard={true}
         />
       </div>

@@ -37,7 +37,7 @@ const SectionCard = ({
       {comingSoon && (
         <Tooltip>
           <TooltipTrigger>
-            <div className="absolute inset-0 backdrop-blur-sm bg-neutral-100/30 rounded-lg flex items-center justify-center z-10">
+            <div className="absolute inset-0 cursor-not-allowed backdrop-blur-sm bg-neutral-100/30 rounded-lg flex items-center justify-center z-10">
               <img
                 src="/construction-logo.webp"
                 alt="Construction"

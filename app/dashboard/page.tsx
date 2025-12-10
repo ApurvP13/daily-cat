@@ -12,7 +12,7 @@ export default function Dashboard() {
           Welcome To Your Daily CAT Prep,{" "}
           <span className="text-orange-300">{user?.firstName}</span>!
         </div>
-        <div className="text-base text-neutral-600 text-lg font-mono text-center mt-3">
+        <div className=" text-neutral-600 text-lg font-mono text-center mt-3">
           Do all the questions to bell the CAT!
         </div>
       </div>
@@ -44,6 +44,7 @@ export default function Dashboard() {
           completed={false}
           onClick={() => {}}
           hard={false}
+          comingSoon={true}
         />
         <SectionCard
           sectionName="Qa"

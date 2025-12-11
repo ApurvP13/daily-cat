@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Label } from '@/components/ui/label'
 import { InlineMath } from 'react-katex'
@@ -10,20 +9,29 @@ interface Option {
 }
 
 interface OptionsProps {
+  questionId: string
   options: Option[]
-  question?: string
+  question?: string | false
   section?: string
+  selectedOption: string | null
+  onAnswerChange: (questionId: string, answer: string | null) => void
 }
 
-const Options = ({ options, question, section }: OptionsProps) => {
-  const [selectedOption, setSelectedOption] = useState<string | null>(null)
-
+const Options = ({
+  questionId,
+  options,
+  question,
+  section,
+  selectedOption,
+  onAnswerChange,
+}: OptionsProps) => {
   const handleOptionChange = (optionId: string) => {
-    setSelectedOption(optionId === selectedOption ? null : optionId)
+    const newSelection = optionId === selectedOption ? null : optionId
+    onAnswerChange(questionId, newSelection)
   }
 
   return (
-    <div className="flex w-1/2 flex-col gap-2 rounded-lg bg-neutral-100 p-6 shadow-lg dark:bg-neutral-800">
+    <div className="flex w-xl flex-col gap-2 rounded-lg bg-neutral-100 p-6 shadow-lg dark:bg-neutral-800">
       {question && (
         <h3 className="mb-2 text-lg font-semibold text-neutral-800 dark:text-neutral-200">
           {question}
@@ -41,7 +49,7 @@ const Options = ({ options, question, section }: OptionsProps) => {
             onCheckedChange={() => handleOptionChange(option.id)}
             className="data-[state=checked]:border-blue-600 data-[state=checked]:bg-blue-600 data-[state=checked]:text-white dark:data-[state=checked]:border-blue-700 dark:data-[state=checked]:bg-blue-700"
           />
-          <div className="text-sm leading-none font-bold">
+          <div className="text-sm leading-none font-medium">
             {section === 'Qa' ? <InlineMath math={option.text} /> : option.text}
           </div>
         </Label>

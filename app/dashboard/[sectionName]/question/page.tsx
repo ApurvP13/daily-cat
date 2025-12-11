@@ -12,6 +12,7 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip'
 import Options from '@/app/components/options'
+import QuestionSelector from '@/app/components/QuestionSelector'
 
 export default function QuestionPage() {
   const params = useParams()
@@ -25,6 +26,80 @@ export default function QuestionPage() {
 
   // Stopwatch state - tracks elapsed seconds
   const [seconds, setSeconds] = useState(0)
+
+  // Current question index for Varc (RC) questions
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
+
+  // Selected answers state
+  // Initialize based on section: Varc has 4 questions, Qa has 1 question
+  const [selectedAnswers, setSelectedAnswers] = useState<
+    Record<string, string | null>
+  >(() => {
+    if (decodedSectionName === 'Varc') {
+      return { q1: null, q2: null, q3: null, q4: null } as Record<
+        string,
+        string | null
+      >
+    } else {
+      // Qa or any other section defaults to 1 question
+      return { q1: null } as Record<string, string | null>
+    }
+  })
+
+  // Define question structure for Varc (4 questions per passage)
+  const varcQuestions = [
+    {
+      id: 'q1',
+      text: 'What is the main idea of the passage?',
+      options: [
+        { id: 'opt-1-1', text: 'Option A' },
+        { id: 'opt-1-2', text: 'Option B' },
+        { id: 'opt-1-3', text: 'Option C' },
+        { id: 'opt-1-4', text: 'Option D' },
+      ],
+    },
+    {
+      id: 'q2',
+      text: 'According to the passage, what can be inferred?',
+      options: [
+        { id: 'opt-2-1', text: 'Option A' },
+        { id: 'opt-2-2', text: 'Option B' },
+        { id: 'opt-2-3', text: 'Option C' },
+        { id: 'opt-2-4', text: 'Option D' },
+      ],
+    },
+    {
+      id: 'q3',
+      text: "The author's tone in this passage is best described as:",
+      options: [
+        { id: 'opt-3-1', text: 'Option A' },
+        { id: 'opt-3-2', text: 'Option B' },
+        { id: 'opt-3-3', text: 'Option C' },
+        { id: 'opt-3-4', text: 'Option D' },
+      ],
+    },
+    {
+      id: 'q4',
+      text: 'Which of the following statements is NOT supported by the passage?',
+      options: [
+        { id: 'opt-4-1', text: 'Option A' },
+        { id: 'opt-4-2', text: 'Option B' },
+        { id: 'opt-4-3', text: 'Option C' },
+        { id: 'opt-4-4', text: 'Option D' },
+      ],
+    },
+  ]
+
+  // Define question structure for Qa (single question)
+  const qaQuestion = {
+    id: 'q1',
+    options: [
+      { id: 'opt-1', text: '\\int_0^\\infty x^2 dx' },
+      { id: 'opt-2', text: 'x = \\frac{-b \\pm \\sqrt{b^2-4ac}}{2a}' },
+      { id: 'opt-3', text: '\\sum_{n=1}^{\\infty} \\frac{1}{n^2}' },
+      { id: 'opt-4', text: 'e^{i\\pi} + 1 = 0' },
+    ],
+  }
 
   // Start the stopwatch when component mounts
   useEffect(() => {
@@ -43,9 +118,17 @@ export default function QuestionPage() {
     return `${mins}:${secs.toString().padStart(2, '0')}`
   }
 
+  // Handles answer change
+  const handleAnswerChange = (questionId: string, answer: string | null) => {
+    setSelectedAnswers((prev) => ({
+      ...prev,
+      [questionId]: answer,
+    }))
+  }
+
   return (
     <div className="flex min-h-screen w-full flex-col items-center p-8">
-      <div className="flex w-full items-center justify-between">
+      <div className="mb-4 flex w-full items-center justify-between">
         {/* Button to go back to the dashboard */}
         <Tooltip>
           <TooltipTrigger asChild>
@@ -69,20 +152,47 @@ export default function QuestionPage() {
           {formatTime(seconds)}
         </div>
       </div>
-      <div className="flex w-full items-center justify-between gap-10">
+      <div className="flex w-full items-start justify-between gap-10">
         <QuestionRenderer
           sectionName={decodedSectionName}
           question={question}
         />
-        <Options
-          question="What is your favorite color?"
-          options={[
-            { id: 'opt-1', text: `\\int_0^\\infty x^2 dx` },
-            { id: 'opt-2', text: 'Blue' },
-            { id: 'opt-3', text: 'Green' },
-          ]}
-          section="Qa"
-        />
+        <div className="flex gap-4">
+          <Options
+            questionId={
+              decodedSectionName === 'Varc'
+                ? varcQuestions[currentQuestionIndex].id
+                : qaQuestion.id
+            }
+            question={
+              decodedSectionName === 'Varc' &&
+              varcQuestions[currentQuestionIndex].text
+            }
+            options={
+              decodedSectionName === 'Varc'
+                ? varcQuestions[currentQuestionIndex].options
+                : qaQuestion.options
+            }
+            section={decodedSectionName}
+            onAnswerChange={handleAnswerChange}
+            selectedOption={
+              selectedAnswers[
+                decodedSectionName === 'Varc'
+                  ? varcQuestions[currentQuestionIndex].id
+                  : qaQuestion.id
+              ]
+            }
+          />
+          {decodedSectionName === 'Varc' && (
+            <QuestionSelector
+              totalQuestions={varcQuestions.length}
+              currentQuestionIndex={currentQuestionIndex}
+              selectedAnswers={selectedAnswers}
+              questionIds={varcQuestions.map((q) => q.id)}
+              onQuestionSelect={setCurrentQuestionIndex}
+            />
+          )}
+        </div>
       </div>
     </div>
   )

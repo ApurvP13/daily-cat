@@ -15,7 +15,7 @@ export default function QuestionRenderer({
   // For Varc - render as normal text
   if (sectionName === 'Varc') {
     return (
-      <div className="mx-auto h-screen w-1/2 overflow-y-auto bg-linear-to-b from-neutral-100 to-neutral-200 p-6 dark:from-neutral-800 dark:to-neutral-900">
+      <div className="mx-auto h-screen w-1/2 overflow-y-auto bg-linear-to-b from-neutral-100 to-neutral-200 p-6 shadow-lg dark:from-neutral-800 dark:to-neutral-900">
         <div className="font-serif text-lg leading-relaxed text-balance whitespace-pre-wrap text-neutral-800 dark:text-neutral-200">
           {question}
         </div>
@@ -26,7 +26,7 @@ export default function QuestionRenderer({
   // For Qa - render with LaTeX using BlockMath
   if (sectionName === 'Qa') {
     return (
-      <div className="mx-auto w-1/2 max-w-4xl p-6">
+      <div className="mx-auto h-full w-1/2 max-w-4xl p-6">
         <div className="rounded-lg bg-neutral-100 p-8 shadow-lg dark:bg-neutral-800">
           <BlockMath math={question} />
         </div>

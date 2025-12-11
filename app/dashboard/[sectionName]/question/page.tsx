@@ -11,6 +11,8 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from '@/components/ui/tooltip'
+import Options from '@/app/components/options'
+
 export default function QuestionPage() {
   const params = useParams()
   const sectionName = params.sectionName as string
@@ -67,10 +69,19 @@ export default function QuestionPage() {
           {formatTime(seconds)}
         </div>
       </div>
-      <div className="flex w-full items-center justify-between">
+      <div className="flex w-full items-center justify-between gap-10">
         <QuestionRenderer
           sectionName={decodedSectionName}
           question={question}
+        />
+        <Options
+          question="What is your favorite color?"
+          options={[
+            { id: 'opt-1', text: `\\int_0^\\infty x^2 dx` },
+            { id: 'opt-2', text: 'Blue' },
+            { id: 'opt-3', text: 'Green' },
+          ]}
+          section="Qa"
         />
       </div>
     </div>

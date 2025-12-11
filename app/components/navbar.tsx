@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import {
   SignInButton,
@@ -8,11 +9,17 @@ import {
 } from "@clerk/nextjs";
 import { ModeToggle } from "@/components/ui/theme-toggle";
 import { Button } from "@/components/ui/button";
-
+import { useRouter } from "next/navigation";
 const navbar = () => {
+  const router = useRouter();
   return (
     <header className="flex justify-between items-center p-4 mx-2 my-4 gap-4 h-16">
-      <div className="text-2xl font-bold">Daily Cat</div>
+      <div
+        className="text-2xl font-bold cursor-pointer"
+        onClick={() => router.push("/")}
+      >
+        Daily Cat
+      </div>
 
       <div className="flex items-center gap-4">
         <SignedOut>

@@ -4,7 +4,7 @@ export const Qa = String.raw`
 4 (x^2 + y^2 + z^2) &= a \\
 4 (x - y - z) &= 3 + a
 \end{align*}
-\\ \text{Then } a \text{ equals?}`;
+\\ \text{Then } a \text{ equals?}`
 
 export const Varc = String.raw`Landing in Australia, the British colonists weren't much impressed with the small-bodied, slender-snooted marsupials called bandicoots. "Their muzzle, which is much too long, gives them an air exceedingly stupid," one naturalist noted in 1805. They nicknamed one type the "zebra rat" because of its black-striped rump.
 
@@ -20,4 +20,4 @@ The imported bandicoots occupy two fenced "exclosures," cleared of invasive rabb
 
 For now, though, a recent surge of rainfall has led to a bandicoot joey boom, raising the Wild Deserts population to about 100, with other sanctuaries adding to that number. There are also signs of rebirth in the landscape itself. With their constant digging, the bandicoots trap moisture and allow for seed germination so the cattle-damaged desert can restore itself.
 
-They have a new nickname—a flattering one, this time. "We call them ecosystem engineers," Pedler says.`;
+They have a new nickname—a flattering one, this time. "We call them ecosystem engineers," Pedler says.`

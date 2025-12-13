@@ -46,7 +46,7 @@ const QuestionSelector = ({
               variant="outline"
               onClick={() => onQuestionSelect(index)}
               aria-label={`Question ${index + 1}${isAnswered ? ' (answered)' : ''}`}
-              className={`h-12 w-12 transition-all duration-200 hover:scale-105 ${getButtonClassName(index)}`}
+              className={`h-12 w-12 transition-all duration-200 hover:scale-105 active:scale-95 ${getButtonClassName(index)}`}
             >
               <span className="relative">{index + 1}</span>
             </Button>

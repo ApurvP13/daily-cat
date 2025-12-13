@@ -13,6 +13,7 @@ import {
 } from '@/components/ui/tooltip'
 import Options from '@/app/components/options'
 import QuestionSelector from '@/app/components/QuestionSelector'
+import { Calculator } from 'lucide-react'
 
 export default function QuestionPage() {
   const params = useParams()
@@ -128,7 +129,7 @@ export default function QuestionPage() {
 
   return (
     <div className="flex min-h-screen w-full flex-col items-center p-8">
-      <div className="mb-4 flex w-full items-center justify-between">
+      <div className="mb-4 flex w-full items-center justify-between px-4">
         {/* Button to go back to the dashboard */}
         <Tooltip>
           <TooltipTrigger asChild>
@@ -147,9 +148,29 @@ export default function QuestionPage() {
           </TooltipContent>
         </Tooltip>
 
-        {/* Stopwatch which counts up from 0:00 */}
-        <div className="text-md rounded-lg bg-neutral-100 px-2 py-1 font-mono shadow-sm dark:bg-neutral-800">
-          {formatTime(seconds)}
+        <div className="flex items-center gap-3">
+          {/* calc */}
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                variant="outline"
+                size="icon"
+                aria-label="Open Calculator"
+                className="transition-all duration-300 active:scale-95"
+                onClick={() => void 0}
+              >
+                <Calculator size={20} />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Open Calculator</p>
+            </TooltipContent>
+          </Tooltip>
+
+          {/* Stopwatch which counts up from 0:00 */}
+          <div className="text-md rounded-lg bg-neutral-100 px-2 py-1 font-mono shadow-sm dark:bg-neutral-800">
+            {formatTime(seconds)}
+          </div>
         </div>
       </div>
       <div className="flex w-full items-start justify-between gap-10">

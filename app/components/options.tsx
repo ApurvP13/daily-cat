@@ -41,7 +41,7 @@ const Options = ({
         <Label
           key={option.id}
           htmlFor={option.id}
-          className="flex items-start gap-3 rounded-lg border p-3 hover:bg-neutral-200 has-aria-checked:bg-blue-50 dark:hover:bg-neutral-700 dark:has-aria-checked:border-blue-900 dark:has-aria-checked:bg-blue-700/30"
+          className="mt-2 flex items-start gap-3 rounded-lg border p-3 transition-all duration-200 ease-out hover:bg-neutral-200 active:scale-95 has-aria-checked:bg-blue-50 dark:hover:bg-neutral-700 dark:has-aria-checked:border-blue-900 dark:has-aria-checked:bg-blue-700/30"
         >
           <Checkbox
             id={option.id}

@@ -27,7 +27,7 @@ const SectionCard = ({
 }: sectionCardProps) => {
   return (
     <div
-      className={`relative flex size-[350px] flex-col items-center justify-between rounded-lg bg-neutral-200 p-4 transition-all duration-300 ease-in-out hover:shadow-xl hover:shadow-neutral-500/10 dark:bg-neutral-800 dark:hover:shadow-neutral-400/10 ${
+      className={`relative flex size-[350px] cursor-pointer flex-col items-center justify-between rounded-lg bg-neutral-200 p-4 transition-all duration-300 ease-in-out hover:shadow-xl hover:shadow-neutral-500/10 dark:bg-neutral-800 dark:hover:shadow-neutral-400/10 ${
         completed
           ? 'border-2 border-emerald-500 shadow-[0_0_20px_rgba(16,185,129,0.3),0_0_40px_rgba(16,185,129,0.2),0_0_60px_rgba(16,185,129,0.1)]'
           : ''

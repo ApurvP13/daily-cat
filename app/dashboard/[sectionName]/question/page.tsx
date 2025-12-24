@@ -14,6 +14,7 @@ import {
 import Options from '@/app/components/options'
 import QuestionSelector from '@/app/components/QuestionSelector'
 import CalculatorDialog from '@/app/components/calculator-dialog'
+import { HourglassIcon } from '@/components/ui/hourglass'
 
 export default function QuestionPage() {
   const params = useParams()
@@ -152,7 +153,8 @@ export default function QuestionPage() {
           {/* calc */}
           <CalculatorDialog />
           {/* Stopwatch which counts up from 0:00 */}
-          <div className="text-md rounded-lg bg-neutral-100 px-2 py-1 font-mono shadow-sm dark:bg-neutral-800">
+          <div className="text-md flex items-center gap-2 rounded-lg bg-neutral-100 px-3 py-1 font-mono shadow-sm dark:bg-neutral-800">
+            <HourglassIcon size={18} className="text-red-500" />
             {formatTime(seconds)}
           </div>
         </div>

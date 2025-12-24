@@ -52,42 +52,72 @@ export default function QuestionPage() {
   const varcQuestions = [
     {
       id: 'q1',
-      text: 'What is the main idea of the passage?',
+      text: 'According to the text, the western barred bandicoots now have a flattering name because they have',
       options: [
-        { id: 'opt-1-1', text: 'Option A' },
-        { id: 'opt-1-2', text: 'Option B' },
-        { id: 'opt-1-3', text: 'Option C' },
-        { id: 'opt-1-4', text: 'Option D' },
+        { id: 'opt-1-1', text: 'grown fivefold in terms of population.' },
+        { id: 'opt-1-2', text: 'led a revival in preserving the species.' },
+        { id: 'opt-1-3', text: 'aided in altering an arid environment.' },
+        { id: 'opt-1-4', text: 'led to a surge and increase of rainfall.' },
       ],
     },
     {
       id: 'q2',
-      text: 'According to the passage, what can be inferred?',
+      text: 'Which one of the following options does NOT represent the characteristics of the western barred bandicoot?',
       options: [
-        { id: 'opt-2-1', text: 'Option A' },
-        { id: 'opt-2-2', text: 'Option B' },
-        { id: 'opt-2-3', text: 'Option C' },
-        { id: 'opt-2-4', text: 'Option D' },
+        {
+          id: 'opt-2-1',
+          text: 'Look of a rat but with a baby pouch and a slender snout',
+        },
+        { id: 'opt-2-2', text: 'Shallow diggers having an elongated muzzle' },
+        {
+          id: 'opt-2-3',
+          text: 'Long thin nose, black striped back, pouch for joeys',
+        },
+        {
+          id: 'opt-2-4',
+          text: 'Smallest black striped marsupial that uses camouflage and dig',
+        },
       ],
     },
     {
       id: 'q3',
-      text: "The author's tone in this passage is best described as:",
+      text: "The text uses the word 'exclosure' because Wild Deserts has adopted a measure of",
       options: [
-        { id: 'opt-3-1', text: 'Option A' },
-        { id: 'opt-3-2', text: 'Option B' },
-        { id: 'opt-3-3', text: 'Option C' },
-        { id: 'opt-3-4', text: 'Option D' },
+        {
+          id: 'opt-3-1',
+          text: 'restoring cattle damaged deserts to green landscapes.',
+        },
+        {
+          id: 'opt-3-2',
+          text: 'excluding animals to make the islands predator-free.',
+        },
+        {
+          id: 'opt-3-3',
+          text: 'ridding the main desert of feral cats and large bilbies.',
+        },
+        { id: 'opt-3-4', text: 'barring the entry of invasive species.' },
       ],
     },
     {
       id: 'q4',
-      text: 'Which of the following statements is NOT supported by the passage?',
+      text: 'Which one of the following statements provides a gist of this passage?',
       options: [
-        { id: 'opt-4-1', text: 'Option A' },
-        { id: 'opt-4-2', text: 'Option B' },
-        { id: 'opt-4-3', text: 'Option C' },
-        { id: 'opt-4-4', text: 'Option D' },
+        {
+          id: 'opt-4-1',
+          text: 'The negligent attitude of the British colonists towards these bandicoots evidenced by the names given to them led to their annihilation.',
+        },
+        {
+          id: 'opt-4-2',
+          text: 'A type of bandicoots was nearly wiped out by invasive species but rescuers now pin hopes on a remnant island population.',
+        },
+        {
+          id: 'opt-4-3',
+          text: 'Marsupials are going extinct due to the colonial era transformation of the ecosystem which also destroyed natural vegetation.',
+        },
+        {
+          id: 'opt-4-4',
+          text: 'The onslaught of animals, such as cattle, rabbits and housecats, brought in by the British led to the extinction of the western barred bandicoot.',
+        },
       ],
     },
   ]

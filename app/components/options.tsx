@@ -41,7 +41,7 @@ const Options = ({
         <Label
           key={option.id}
           htmlFor={option.id}
-          className="mt-2 flex items-start gap-3 rounded-lg border p-3 transition-all duration-200 ease-out hover:bg-neutral-200 active:scale-95 has-aria-checked:bg-blue-50 dark:hover:bg-neutral-700 dark:has-aria-checked:border-blue-900 dark:has-aria-checked:bg-blue-700/30"
+          className="mt-2 flex items-center gap-3 rounded-lg border p-3 transition-all duration-200 ease-out hover:bg-neutral-200 active:scale-95 has-aria-checked:bg-blue-50 dark:hover:bg-neutral-700 dark:has-aria-checked:border-blue-900 dark:has-aria-checked:bg-blue-700/30"
         >
           <Checkbox
             id={option.id}
@@ -49,7 +49,7 @@ const Options = ({
             onCheckedChange={() => handleOptionChange(option.id)}
             className="data-[state=checked]:border-blue-600 data-[state=checked]:bg-blue-600 data-[state=checked]:text-white dark:data-[state=checked]:border-blue-700 dark:data-[state=checked]:bg-blue-700"
           />
-          <div className="text-sm leading-none font-medium">
+          <div className="text-sm leading-5 font-medium">
             {section === 'Qa' ? <InlineMath math={option.text} /> : option.text}
           </div>
         </Label>

@@ -126,10 +126,10 @@ export default function QuestionPage() {
   const qaQuestion = {
     id: 'q1',
     options: [
-      { id: 'opt-1', text: '\\int_0^\\infty x^2 dx' },
-      { id: 'opt-2', text: 'x = \\frac{-b \\pm \\sqrt{b^2-4ac}}{2a}' },
-      { id: 'opt-3', text: '\\sum_{n=1}^{\\infty} \\frac{1}{n^2}' },
-      { id: 'opt-4', text: 'e^{i\\pi} + 1 = 0' },
+      { id: 'opt-1', text: '3' },
+      { id: 'opt-2', text: '1\\frac{1}{3}' },
+      { id: 'opt-3', text: '1' },
+      { id: 'opt-4', text: '4' },
     ],
   }
 
@@ -156,6 +156,28 @@ export default function QuestionPage() {
       ...prev,
       [questionId]: answer,
     }))
+  }
+
+  const handleSubmit = async () => {
+    try {
+      const response = await fetch('/api/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          selectedAnswers,
+          seconds,
+          sectionName: decodedSectionName,
+        }),
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to submit answers')
+      }
+    } catch (error) {
+      console.error('Error submitting answers:', error)
+    }
   }
 
   return (
@@ -232,9 +254,12 @@ export default function QuestionPage() {
         </div>
       </div>
       {/* Gradient border using wrapper technique */}
-      <div className="fixed right-10 bottom-5 rounded-full bg-linear-to-b from-[#c9c9c9] via-[#686a69] to-[#05070c] p-px shadow-2xl transition-all duration-150 hover:scale-105 active:scale-97">
+      <div
+        onClick={handleSubmit}
+        className="fixed right-10 bottom-5 cursor-pointer rounded-full bg-linear-to-b from-[#c9c9c9] via-[#686a69] to-[#05070c] p-px shadow-2xl transition-all duration-150 hover:scale-105 active:scale-97"
+      >
         <div className="rounded-full bg-linear-to-b from-[#fafafa] via-[#565656] to-[#999999] p-[4px]">
-          <div className="flex h-12 w-32 items-center justify-center rounded-full bg-linear-to-b from-[#fafafa] to-[#666666] text-lg font-black tracking-wide text-neutral-600">
+          <div className="text-md flex h-10 w-28 items-center justify-center rounded-full bg-linear-to-b from-[#fafafa] to-[#666666] font-black tracking-wide text-neutral-600">
             <div className="bg-linear-to-b from-[#999] to-[#1e1e1e] bg-clip-text text-transparent">
               Submit
             </div>

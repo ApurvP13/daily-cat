@@ -10,6 +10,31 @@ export type AttemptStore = Map<string, unknown>
 
 export type SectionType = 'Varc' | 'Qa'
 
+// Request and Response types
+interface SubmitRequest {
+  selectedAnswers: Record<string, string | null>
+  sectionName: SectionType
+  timeSpent: number
+}
+
+interface AnswerBreakdownItem {
+  questionId: string
+  status: 'correct' | 'incorrect' | 'unanswered'
+  userAnswer: string | null
+  correctAnswer: string
+}
+
+interface SubmitResponse {
+  attemptId: string
+  score: number
+  rankScore: number
+  efficiency: number
+  timeSpent: number
+  answerBreakdown: AnswerBreakdownItem[]
+  correctAnswers: Record<string, string>
+  userAnswers: Record<string, string | null>
+}
+
 // Type-safe attempt store
 const attemptStore: AttemptStore = new Map()
 
@@ -89,12 +114,92 @@ export function getAnswersBySection(section: SectionType): Answer[] {
   return section === 'Varc' ? varcAnswers : qaAnswers
 }
 
+// Helper function to generate unique attempt ID
+function generateAttemptId(): string {
+  return `attempt_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`
+}
+
 // API Route Handler
 export async function POST(request: Request) {
   try {
-    const body = await request.json()
-    console.log('Received submission:', body)
-    return Response.json({ success: true })
+    const body: SubmitRequest = await request.json()
+    const { selectedAnswers, sectionName, timeSpent } = body
+
+    // Get correct answers for the section
+    const correctAnswersList = getAnswersBySection(sectionName)
+
+    // Create a map of questionId -> correct answer for easy lookup
+    const correctAnswersMap: Record<string, string> = {}
+    correctAnswersList.forEach((answer) => {
+      correctAnswersMap[answer.questionId] = answer.answer
+    })
+
+    // Calculate score and create answer breakdown
+    let score = 0
+    let correctCount = 0
+    const answerBreakdown: AnswerBreakdownItem[] = []
+
+    // Get all question IDs for this section
+    const allQuestionIds = correctAnswersList.map((a) => a.questionId)
+
+    // Process each question
+    allQuestionIds.forEach((questionId) => {
+      const userAnswer = selectedAnswers[questionId] || null
+      const correctAnswer = correctAnswersMap[questionId]
+
+      let status: 'correct' | 'incorrect' | 'unanswered'
+      let questionScore = 0
+
+      if (userAnswer === null) {
+        // Unanswered
+        status = 'unanswered'
+        questionScore = 0
+      } else if (userAnswer === correctAnswer) {
+        // Correct answer
+        status = 'correct'
+        questionScore = 3
+        score += 3
+        correctCount++
+      } else {
+        // Wrong answer
+        status = 'incorrect'
+        questionScore = -1
+        score -= 1
+      }
+
+      answerBreakdown.push({
+        questionId,
+        status,
+        userAnswer,
+        correctAnswer,
+      })
+    })
+
+    // Calculate rank score: (score × 1,000,000) - timeSpent
+    const rankScore = score * 1_000_000 - timeSpent
+
+    // Calculate efficiency: (number_of_correct_answers / timeSpent) × 100
+    // Handle division by zero
+    const efficiency = timeSpent > 0 ? (correctCount / timeSpent) * 100 : 0
+
+    // Generate unique attempt ID
+    const attemptId = generateAttemptId()
+
+    // Prepare response
+    const response: SubmitResponse = {
+      attemptId,
+      score,
+      rankScore,
+      efficiency: Math.round(efficiency * 100) / 100, // Round to 2 decimal places
+      timeSpent,
+      answerBreakdown,
+      correctAnswers: correctAnswersMap,
+      userAnswers: selectedAnswers,
+    }
+
+    console.log('Scoring result:', response)
+
+    return Response.json(response)
   } catch (error) {
     console.error('Error processing submission:', error)
     return Response.json(

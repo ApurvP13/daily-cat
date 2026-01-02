@@ -167,7 +167,7 @@ export default function QuestionPage() {
         },
         body: JSON.stringify({
           selectedAnswers,
-          seconds,
+          timeSpent: seconds,
           sectionName: decodedSectionName,
         }),
       })
@@ -256,13 +256,13 @@ export default function QuestionPage() {
       {/* Gradient border using wrapper technique */}
       <div
         onClick={handleSubmit}
-        className="fixed right-10 bottom-5 cursor-pointer rounded-full bg-linear-to-b from-[#c9c9c9] via-[#686a69] to-[#05070c] p-px shadow-2xl transition-all duration-150 hover:scale-105 active:scale-97"
+        className="fixed right-10 bottom-10 cursor-pointer rounded-full bg-linear-to-b from-[#10C96B] to-[#01AE56] p-px shadow-[0_5px_0_0_rgba(107,186,51,0.7)] transition-all duration-150 hover:scale-105 hover:shadow-[0_6px_0_0_rgba(107,186,51,0.7)] active:scale-95 active:shadow-[0_2px_0_0_rgba(107,186,51,0.7)]"
       >
-        <div className="rounded-full bg-linear-to-b from-[#fafafa] via-[#565656] to-[#999999] p-[4px]">
-          <div className="text-md flex h-10 w-28 items-center justify-center rounded-full bg-linear-to-b from-[#fafafa] to-[#666666] font-black tracking-wide text-neutral-600">
-            <div className="bg-linear-to-b from-[#999] to-[#1e1e1e] bg-clip-text text-transparent">
+        <div className="rounded-full bg-linear-to-b from-[#A0F464] via-[#A0F464] to-[#A0F464] p-px">
+          <div className="flex h-12 w-32 items-center justify-center gap-2 rounded-full bg-linear-to-b from-[#10C96B] to-[#01AE56] font-bold tracking-wide text-white shadow-inner shadow-[#05B55B]/40">
+            <span className="drop-shadow-[0_0_3px_rgba(146,232,85,0.6)]">
               Submit
-            </div>
+            </span>
           </div>
         </div>
       </div>

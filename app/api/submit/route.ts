@@ -33,6 +33,7 @@ interface SubmitResponse {
   answerBreakdown: AnswerBreakdownItem[]
   correctAnswers: Record<string, string>
   userAnswers: Record<string, string | null>
+  accuracy: number
 }
 
 // Type-safe attempt store
@@ -178,6 +179,13 @@ export async function POST(request: Request) {
     // Calculate rank score: (score × 1,000,000) - timeSpent
     const rankScore = score * 1_000_000 - timeSpent
 
+    // INSERT_YOUR_CODE
+    // Calculate accuracy: (number_of_correct_answers / total_questions) × 100
+    // Handle division by zero
+    const totalQuestions = allQuestionIds.length
+    const accuracy =
+      totalQuestions > 0 ? (correctCount / totalQuestions) * 100 : 0
+
     // Calculate efficiency: (number_of_correct_answers / timeSpent) × 100
     // Handle division by zero
     const efficiency = timeSpent > 0 ? (correctCount / timeSpent) * 100 : 0
@@ -195,6 +203,7 @@ export async function POST(request: Request) {
       answerBreakdown,
       correctAnswers: correctAnswersMap,
       userAnswers: selectedAnswers,
+      accuracy: Math.round(accuracy * 100) / 100, // Round to 2 decimal places
     }
 
     console.log('Scoring result:', response)

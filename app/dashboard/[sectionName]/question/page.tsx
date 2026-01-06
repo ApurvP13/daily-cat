@@ -3,7 +3,7 @@
 import { useParams, useRouter } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import QuestionRenderer from '@/app/components/questionRenderer'
-import * as questions from '@/lib/data'
+import { getQuestionBySection } from '@/lib/data'
 import { Button } from '@/components/ui/button'
 import { ArrowLeftIcon } from '@/components/ui/arrow-left'
 import {
@@ -24,7 +24,7 @@ export default function QuestionPage() {
   const decodedSectionName = decodeURIComponent(sectionName)
 
   // Get the question based on sectionName
-  const question = questions[decodedSectionName as keyof typeof questions] || ''
+  const question = getQuestionBySection(decodedSectionName)
 
   // Stopwatch state - tracks elapsed seconds
   const [seconds, setSeconds] = useState(0)

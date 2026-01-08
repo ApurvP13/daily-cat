@@ -15,7 +15,7 @@ export default function QuestionRenderer({
   // For Varc - render as normal text
   if (sectionName === 'Varc') {
     return (
-      <div className="mx-auto h-screen w-1/2 overflow-y-auto bg-linear-to-b from-neutral-100 to-neutral-200 p-6 shadow-lg dark:from-neutral-800 dark:to-neutral-900">
+      <div className="mx-auto h-screen w-full overflow-y-auto bg-linear-to-b from-neutral-100 to-neutral-200 p-6 shadow-lg dark:from-neutral-800 dark:to-neutral-900">
         <div className="font-serif text-lg leading-relaxed text-balance whitespace-pre-wrap text-neutral-800 dark:text-neutral-200">
           {question}
         </div>

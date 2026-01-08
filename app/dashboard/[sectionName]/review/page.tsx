@@ -6,7 +6,9 @@ import { BarChartIcon, CheckCircle, Clock3, Flame, Award } from 'lucide-react'
 import QuestionRenderer from '@/app/components/questionRenderer'
 import ReviewOptions from '@/app/components/review-options'
 import QuestionSelector from '@/app/components/QuestionSelector'
-import { getQuestionBySection } from '@/lib/data'
+import { BlockMath } from 'react-katex'
+import 'katex/dist/katex.min.css'
+import { getQuestionBySection, varcAnswers, qaAnswers } from '@/lib/data'
 
 export default function ReviewPage() {
   const params = useParams()
@@ -194,7 +196,7 @@ export default function ReviewPage() {
       : qaQuestion.id
 
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center gap-10">
+    <div className="flex h-full w-full flex-col items-center justify-center">
       <div className="mb-4 flex w-full items-center justify-center gap-12 px-10">
         <StatCards
           title="Score"
@@ -221,8 +223,13 @@ export default function ReviewPage() {
           icon={CheckCircle}
         />
       </div>
-      <div className="flex w-full items-center justify-between gap-10 px-10">
-        <div className="flex h-96 w-full flex-col items-center justify-start gap-4">
+      <div className="mt-10 grid w-full grid-cols-2 grid-rows-2 gap-10 px-10">
+        {/* QuestionRenderer and badges - row 1, column 1 */}
+        <div
+          className={`col-span-1 row-span-1 flex flex-col items-center justify-center gap-4 ${
+            decodedSectionName === 'Varc' ? 'h-96' : ''
+          }`}
+        >
           <QuestionRenderer
             sectionName={decodedSectionName}
             question={question}
@@ -239,7 +246,8 @@ export default function ReviewPage() {
             </span>
           </div>
         </div>
-        <div className="flex items-start gap-4">
+        {/* ReviewOptions and QuestionSelector - row 1, column 2 */}
+        <div className="col-span-1 row-span-1 flex items-start gap-4">
           <ReviewOptions
             questionId={activeQuestionId}
             options={
@@ -276,6 +284,21 @@ export default function ReviewPage() {
               onQuestionSelect={setCurrentQuestionIndex}
             />
           )}
+        </div>
+        {/* Empty cell - row 2, column 1 */}
+        <div className="col-span-1 row-span-1"></div>
+        {/* Explanation - row 2, column 2 */}
+        <div className="col-span-1 row-span-1 flex flex-col gap-4">
+          <div className="text-lg font-bold">Explanation : </div>
+          <div className="max-h-72 overflow-y-auto rounded-xl bg-linear-to-b from-neutral-100 to-neutral-200 p-6 shadow-lg dark:from-neutral-800 dark:to-neutral-900">
+            <div className="font-serif text-lg leading-relaxed text-balance whitespace-pre-wrap text-neutral-800 dark:text-neutral-200">
+              {decodedSectionName === 'Varc' ? (
+                varcAnswers[currentQuestionIndex].explanation
+              ) : (
+                <BlockMath math={qaAnswers[0].explanation} />
+              )}
+            </div>
+          </div>
         </div>
       </div>
     </div>

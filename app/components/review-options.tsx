@@ -32,7 +32,7 @@ const ReviewOptions = ({
   section,
 }: ReviewOptionsProps) => {
   return (
-    <div className="flex w-xl flex-col gap-2 rounded-lg bg-neutral-100 p-6 shadow-lg dark:bg-neutral-800">
+    <div className="flex h-full w-xl flex-col justify-evenly gap-2 rounded-lg bg-neutral-100 p-6 shadow-lg dark:bg-neutral-800">
       {question && (
         <h3 className="mb-2 text-lg font-semibold text-neutral-800 dark:text-neutral-200">
           {question}

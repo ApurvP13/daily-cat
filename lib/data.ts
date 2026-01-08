@@ -66,37 +66,40 @@ export const qaAnswers: Answer[] = [
     id: 'a1',
     questionId: 'q1',
     answer: 'opt-3',
-    explanation: `\\text{Let } x, y, \\text{ and } z \\text{ be real numbers satisfying}
-  
-  \\begin{align*}
-  4(x^2 + y^2 + z^2) &= a \\\\
-  4(x - y - z) &= 3 + a \\\\
-  x^2 + y^2 + z^2 &= a/4 \\\\
-  x - y - z &= (3 + a)/4
-  \\end{align*}
-  
-  \\text{Let } y_1 = -y \\text{ and } z_1 = -z
-  
-  $$x + y_1 + z_1 = (3 + a)/4$$
-  
-  \\text{We know that } x^2 + y^2 + z^2 \\geq xy + yz + zx \\text{ (Identity)}
-  
-  \\begin{align*}
-  (x + y + z)^2 &= x^2 + y^2 + z^2 + 2xy + 2yz + 2zx \\\\
-  (x + y + z)^2 &\\leq 3(x^2 + y^2 + z^2)
-  \\end{align*}
-  
-  \\text{Substituting the values,}
-  
-  \\begin{align*}
-  \\{(3 + a)/4\\}^2 &\\leq 3(a/4) \\\\
-  (3 + a)(3 + a) &\\leq 4 \\cdot 3a \\\\
-  9 + a^2 + 6a &\\leq 12a \\\\
-  9 + a^2 - 6a &\\leq 0 \\\\
-  (a - 3)^2 &\\leq 0
-  \\end{align*}
-  
-  \\text{The value of } a \\text{ which satisfies the above equation is } 3.`,
+    explanation: String.raw`\text{Let } x, y, \text{ and } z \text{ be real numbers satisfying} \\
+
+    \begin{align*} \\
+    4(x^2 + y^2 + z^2) &= a \\
+    4(x - y - z) &= 3 + a \\
+    x^2 + y^2 + z^2 &= a/4 \\
+    x - y - z &= (3 + a)/4
+    \end{align*} \\
+    
+    
+    \text{Let } y_1 = -y \text{ and } z_1 = -z \\
+    
+    \begin{align*} \\
+    x + y_1 + z_1 = (3 + a)/4
+    \end{align*} \\
+    
+    \text{We know that } x^2 + y^2 + z^2 \geq xy + yz + zx \text{ (Identity)} \\
+    
+    \begin{align*} \\
+    (x + y + z)^2 &= x^2 + y^2 + z^2 + 2xy + 2yz + 2zx \\
+    (x + y + z)^2 &\leq 3(x^2 + y^2 + z^2) \\
+    \end{align*} \\
+
+    \text{Substituting the values,} \\
+    
+    \begin{align*} \\ 
+    \left(\frac{3 + a}{4}\right)^2 &\leq 3\left(\frac{a}{4}\right) \\
+    (3 + a)(3 + a) &\leq 4 \cdot 3a \\
+    9 + a^2 + 6a &\leq 12a \\
+    9 + a^2 - 6a &\leq 0 \\
+    (a - 3)^2 &\leq 0
+    \end{align*} \\ 
+    
+    \text{The value of } a \text{ which satisfies the above equation is } 3.`,
   },
 ]
 

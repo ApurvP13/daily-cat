@@ -9,6 +9,7 @@ import QuestionSelector from '@/app/components/QuestionSelector'
 import { BlockMath } from 'react-katex'
 import 'katex/dist/katex.min.css'
 import { getQuestionBySection, varcAnswers, qaAnswers } from '@/lib/data'
+import Leaderboard from '@/app/components/leaderboard'
 
 export default function ReviewPage() {
   const params = useParams()
@@ -172,6 +173,42 @@ export default function ReviewPage() {
     accuracy: 0,
   }
 
+  const dummyScore = {
+    data: [
+      {
+        id: 1,
+        date: '2025-01-08T10:30:00',
+        name: 'Alice',
+        score: 95,
+      },
+      {
+        id: 2,
+        date: '2025-01-07T14:20:00',
+        name: 'Bob',
+        score: 87,
+      },
+      {
+        id: 3,
+        date: '2025-01-08T09:15:00',
+        name: 'Charlie',
+        score: 92,
+      },
+      {
+        id: 4,
+        date: '2025-01-08T09:15:00',
+        name: 'Daddy',
+        score: 92,
+      },
+      {
+        id: 5,
+        date: '2025-01-08T09:15:00',
+        name: 'Fed',
+        score: 92,
+      },
+    ],
+    error: null,
+  }
+
   // Pick attempt data based on section
   const dummyAttempt =
     decodedSectionName === 'Varc' ? varcDummyAttempt : qaDummyAttempt
@@ -196,7 +233,7 @@ export default function ReviewPage() {
       : qaQuestion.id
 
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center">
+    <div className="mb-10 flex h-full w-full flex-col items-center justify-center">
       <div className="mb-4 flex w-full items-center justify-center gap-12 px-10">
         <StatCards
           title="Score"
@@ -285,8 +322,10 @@ export default function ReviewPage() {
             />
           )}
         </div>
-        {/* Empty cell - row 2, column 1 */}
-        <div className="col-span-1 row-span-1"></div>
+        {/* Leaderboard - row 2, column 1 */}
+        <div className="col-span-1 row-span-1">
+          <Leaderboard scores={dummyScore.data} />
+        </div>
         {/* Explanation - row 2, column 2 */}
         <div className="col-span-1 row-span-1 flex flex-col gap-4">
           <div className="text-lg font-bold">Explanation : </div>

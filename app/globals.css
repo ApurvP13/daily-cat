@@ -1,5 +1,5 @@
-@import "tailwindcss";
-@import "tw-animate-css";
+@import 'tailwindcss';
+@import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -119,4 +119,33 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+@keyframes shine {
+  0% {
+    background-position: 200% 0%;
+  }
+  100% {
+    background-position: -200% 0%;
+  }
+}
+
+.shine-text {
+  color: transparent;
+  background-clip: text !important;
+  -webkit-background-clip: text !important;
+  background:
+    radial-gradient(
+        circle at center,
+        rgba(255, 255, 255, 0.8),
+        transparent
+      ) -200%
+      50% / 200% 100% no-repeat,
+    linear-gradient(
+      to right,
+      rgb(229, 229, 229),
+      rgb(115, 115, 115),
+      rgb(64, 64, 64)
+    );
+  animation: shine 3s linear infinite;
 }

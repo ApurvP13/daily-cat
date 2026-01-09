@@ -2,13 +2,25 @@
 import { useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import StatCards from '@/app/components/stat-cards'
-import { BarChartIcon, CheckCircle, Clock3, Flame, Award } from 'lucide-react'
+import {
+  BarChartIcon,
+  CheckCircle,
+  Clock3,
+  Flame,
+  Award,
+  Lock,
+} from 'lucide-react'
 import QuestionRenderer from '@/app/components/questionRenderer'
 import ReviewOptions from '@/app/components/review-options'
 import QuestionSelector from '@/app/components/QuestionSelector'
 import { BlockMath } from 'react-katex'
 import 'katex/dist/katex.min.css'
 import { getQuestionBySection, varcAnswers, qaAnswers } from '@/lib/data'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@/components/ui/tooltip'
 import Leaderboard from '@/app/components/leaderboard'
 
 export default function ReviewPage() {
@@ -287,6 +299,11 @@ export default function ReviewPage() {
         <div className="col-span-1 row-span-1 flex items-start gap-4">
           <ReviewOptions
             questionId={activeQuestionId}
+            question={
+              decodedSectionName === 'Varc'
+                ? varcQuestions[currentQuestionIndex].text
+                : undefined
+            }
             options={
               decodedSectionName === 'Varc'
                 ? varcQuestions[currentQuestionIndex].options
@@ -324,11 +341,31 @@ export default function ReviewPage() {
         </div>
         {/* Leaderboard - row 2, column 1 */}
         <div className="col-span-1 row-span-1">
-          <Leaderboard scores={dummyScore.data} />
+          <Leaderboard scores={dummyScore.data} currentUserId={3} />
         </div>
         {/* Explanation - row 2, column 2 */}
         <div className="col-span-1 row-span-1 flex flex-col gap-4">
-          <div className="text-lg font-bold">Explanation : </div>
+          <div className="bg-muted flex items-center gap-2 rounded-lg p-2 text-lg font-bold">
+            <div className="border-ring bg-accent text-md w-1/2 rounded-lg border p-1 text-center font-medium tracking-wider">
+              Text Explanation
+            </div>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <button
+                  type="button"
+                  className="border-ring text-md flex w-1/2 items-center justify-center gap-2 rounded-lg border-0 p-1 text-center font-medium tracking-wider text-neutral-600 hover:text-neutral-800 dark:hover:text-neutral-200"
+                >
+                  <Lock />
+                  Video Explanation
+                </button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>
+                  Video explanation for this question is currently unavailable.
+                </p>
+              </TooltipContent>
+            </Tooltip>
+          </div>
           <div className="max-h-72 overflow-y-auto rounded-xl bg-linear-to-b from-neutral-100 to-neutral-200 p-6 shadow-lg dark:from-neutral-800 dark:to-neutral-900">
             <div className="font-serif text-lg leading-relaxed text-balance whitespace-pre-wrap text-neutral-800 dark:text-neutral-200">
               {decodedSectionName === 'Varc' ? (

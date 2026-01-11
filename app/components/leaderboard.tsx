@@ -56,7 +56,7 @@ const Leaderboard = ({ scores, currentUserId }: LeaderboardProps) => {
   return (
     <div
       ref={containerRef}
-      className="flex h-96 w-full flex-col items-center gap-4 overflow-auto bg-linear-to-b from-neutral-100 to-neutral-200 px-6 py-8 dark:from-neutral-900 dark:to-neutral-950"
+      className="flex h-96 w-full flex-col items-center gap-4 overflow-auto rounded-lg bg-linear-to-b from-neutral-100 to-neutral-200 px-6 py-8 shadow-lg dark:from-neutral-900 dark:to-neutral-950"
     >
       <div className="shine-text bg-linear-to-r from-neutral-200 via-neutral-500 to-neutral-700 bg-clip-text text-6xl font-black text-transparent">
         Leaderboard

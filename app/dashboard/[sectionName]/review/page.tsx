@@ -296,7 +296,7 @@ export default function ReviewPage() {
           </div>
         </div>
         {/* ReviewOptions and QuestionSelector - row 1, column 2 */}
-        <div className="col-span-1 row-span-1 flex items-start gap-4">
+        <div className="col-span-1 row-span-1 flex items-start justify-center gap-4">
           <ReviewOptions
             questionId={activeQuestionId}
             question={
@@ -346,7 +346,7 @@ export default function ReviewPage() {
         {/* Explanation - row 2, column 2 */}
         <div className="col-span-1 row-span-1 flex flex-col gap-4">
           <div className="bg-muted flex items-center gap-2 rounded-lg p-2 text-lg font-bold">
-            <div className="border-ring bg-accent text-md w-1/2 rounded-lg border p-1 text-center font-medium tracking-wider">
+            <div className="border-ring bg-accent text-md w-1/2 rounded-lg border-2 p-1 text-center font-medium tracking-wider">
               Text Explanation
             </div>
             <Tooltip>

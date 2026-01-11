@@ -26,7 +26,7 @@ export default function QuestionRenderer({
   // For Qa - render with LaTeX using BlockMath
   if (sectionName === 'Qa') {
     return (
-      <div className="w-1/2 max-w-4xl">
+      <div className="max-w-5xl">
         <div className="rounded-lg bg-neutral-100 p-8 shadow-lg dark:bg-neutral-800">
           <BlockMath math={question} />
         </div>
